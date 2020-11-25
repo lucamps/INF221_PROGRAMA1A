@@ -6,24 +6,24 @@ import java.util.Scanner;
 
 public class Resultados {
 	private CadastrarInfo dados;
+	private int numClassif;
 	
-	Resultados(){
-		dados = new CadastrarInfo();
-	}
-	void setDados(CadastrarInfo dados) {
+	// Construtor
+	public Resultados(CadastrarInfo dados) {
 		this.dados = dados;
+		calculaNumClassif();
 	}
 	
-	public int getNumClassificados() {
-		int classificados = dados.getNumMinClassificados();
+	public void calculaNumClassif() {
+		numClassif = dados.getNumMinClassificados();
 		dados.ordenarLista();
 		
-		Double base = dados.pontos.get(classificados-1);
+		Double base = dados.pontos.get(numClassif-1);
 		
-		while(dados.pontos.get(classificados-1) == base)
-			classificados++;
+		while(dados.pontos.get(numClassif-1) == base) {
+			numClassif++;
+		}
 		
-		return classificados;
 	}
 	
 	public Double getMediaGeral() {
@@ -32,11 +32,11 @@ public class Resultados {
 			soma += i;
 		return soma/dados.pontos.size();
 	}
-	public Double getMediaC(int classificados) {
+	public Double getMediaC() {
 		Double soma = 0.0;
-		for(int i =0; i< classificados; i++)
+		for(int i =0; i< numClassif; i++)
 			soma += dados.pontos.get(i);
-		return soma/classificados;
+		return soma/numClassif;
 	}
 	public Double getDesvioPadraoGeral() {
 	    Double media = getMediaGeral();
@@ -50,16 +50,37 @@ public class Resultados {
 	    desvPadrao = Math.sqrt(desvPadrao / (tam));
 	    return desvPadrao;
 	}
-	public Double getDesvioPadraoC(int classificados) {
-	    Double media = getMediaC(classificados);
-	    int tam = classificados;
+	public Double getDesvioPadraoC() {
+	    Double media = getMediaC();
+	    int tam = numClassif;
 	    Double desvPadrao = 0.0;
 	    Double aux;
-	    for (int i =0; i< classificados; i++) {
+	    for (int i =0; i< numClassif; i++) {
 	        aux = dados.pontos.get(i) - media;
 	        desvPadrao += aux * aux;
 	    }
 	    desvPadrao = Math.sqrt(desvPadrao / (tam));
 	    return desvPadrao;
+	}
+	public int getNumClassif() {
+		return numClassif;
+	}
+	public void setNumClassif(int numClassif) {
+		this.numClassif = numClassif;
+	}
+	
+	public void printResult() {
+		//Formatando saida
+				Locale locale  = new Locale("en", "US");
+				DecimalFormat df = (DecimalFormat)
+				        NumberFormat.getNumberInstance(locale);
+				df.applyPattern("#0.00");
+				
+				//Imprimindo resultados
+				System.out.println(getNumClassif());
+				System.out.println(df.format(getDesvioPadraoC()));
+				System.out.println(df.format(getMediaC()));
+				System.out.println(df.format(getDesvioPadraoGeral()));
+				System.out.println(df.format(getMediaGeral()));
 	}
 }

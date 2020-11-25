@@ -1,8 +1,5 @@
 package obi_classification;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -18,25 +15,13 @@ public class Main {
 			dados.pontos.add(sc.nextDouble());
 		}
 		
-		Resultados result = new Resultados();
-		result.setDados(dados);
-		
-		int numC = result.getNumClassificados();
-		
-		//Formatando saida
-		Locale locale  = new Locale("en", "US");
-		DecimalFormat df = (DecimalFormat)
-		        NumberFormat.getNumberInstance(locale);
-		df.applyPattern("#0.00");
-		
-		//Imprimindo resultados
-		System.out.println(numC);
-		System.out.println(df.format(result.getDesvioPadraoC(numC)));
-		System.out.println(df.format(result.getMediaC(numC)));
-		System.out.println(df.format(result.getDesvioPadraoGeral()));
-		System.out.println(df.format(result.getMediaGeral()));
-		
 		sc.close();
+		
+		Resultados result = new Resultados(dados);
+		
+		result.printResult();
+		
+		
 	}
 	
 
