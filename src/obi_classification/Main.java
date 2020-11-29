@@ -12,17 +12,18 @@ public class Main {
 		dados.setNumMinClassificados(sc.nextInt());
 		
 		for(int i = 0; i< dados.getNumParticipantes(); i++) {
-			dados.pontos.add(sc.nextDouble());
+			dados.addPontuacao(sc.nextDouble());
 		}
 		
 		sc.close();
 		
-		Resultados result = new Resultados(dados);
-		
-		result.printResult();
-		
+		if(dados.getNumParticipantes() > 0 && dados.getNumMinClassificados() >0) {
+			Resultados result = new Resultados(dados);
+			result.printResult();
+		}
+		else 
+			System.out.println("0\n0.00\n0.00\n0.00\n0.00");
 		
 	}
 	
-
 }

@@ -1,21 +1,12 @@
 package obi_classification;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class CadastrarInfo {
 	private int numParticipantes;
 	private int numMinClassificados;
-	public ArrayList<Double> pontos;
+	protected ArrayList<Double> pontos;
 	
-	public void ordenarLista() {
-		Collections.sort(pontos, Collections.reverseOrder());
-	}
-	public CadastrarInfo() {
-		numParticipantes = 0;
-		numMinClassificados = 0;
-		pontos = new ArrayList<Double>();
-	}
 	public int getNumMinClassificados() {
 		return numMinClassificados;
 	}
@@ -28,4 +19,27 @@ public class CadastrarInfo {
 	public void setNumParticipantes(int numParticipantes) {
 		this.numParticipantes = numParticipantes;
 	}
+	public void setListPontos(ArrayList<Double> pontos) {
+		this.pontos = pontos;
+	}
+	public ArrayList<Double> getListPontos(){
+		return pontos;
+	}
+	public void ordenarLista() {
+		Collections.sort(pontos, Collections.reverseOrder());
+	}
+	public CadastrarInfo() {
+		numParticipantes = 0;
+		numMinClassificados = 0;
+		pontos = new ArrayList<Double>();
+	}
+	public void addPontuacao(Double num) {
+		pontos.add(num);
+	}
+	public Double getPontuacao(int pos) {
+		if(pos >= numParticipantes)
+			return -1.0;
+		return pontos.get(pos);
+	}
+	
 }
