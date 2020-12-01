@@ -17,13 +17,7 @@ public class Main {
 		
 		sc.close();
 		
-		if(dados.getNumParticipantes() > 0 && dados.getNumMinClassificados() >0) {
-			Resultados result = new Resultados(dados);
-			result.printResult();
-		}
-		else 
-			System.out.println("0\n0.00\n0.00\n0.00\n0.00");
-		
+		Resultados result = new Resultados(dados);
+		result.printResult();
 	}
-	
 }
